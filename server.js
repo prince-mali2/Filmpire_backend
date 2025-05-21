@@ -205,55 +205,18 @@ app.get("/api/search/movie", async (req, res) => {
 
 ///////////////////////////////////////////////////
 //////////////////////////////////////////////
-
-// 1. Endpoint to get request token
-app.get("/api/auth/request_token", async (req, res) => {
-  try {
-    const response = await axios.get(
-      `https://api.themoviedb.org/3/authentication/token/new`,
-      { params: { api_key: TMDB_API_KEY } }
-    );
-    res.json(response.data); // { success: true, request_token: "..." }
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+app.get('/api/authentication/token/new', async (req, res) => {
+    try {
+        const response = await axios.get('https://api.themoviedb.org/3/authentication/token/new', {
+            params: { api_key: TMDB_API_KEY },
+        });
+        res.json(response.data);
+    } catch (error) {
+        console.error('Error fetching token:', error.message);
+        res.status(500).json({ error: error.message });
+    }
 });
 
-// 2. Endpoint to create session ID from request token (POST)
-app.post("/api/auth/session", async (req, res) => {
-  const { request_token } = req.body;
-  if (!request_token) {
-    return res.status(400).json({ error: "Request token required" });
-  }
-
-  try {
-    const response = await axios.post(
-      `https://api.themoviedb.org/3/authentication/session/new`,
-      { request_token },
-      { params: { api_key: TMDB_API_KEY } }
-    );
-    res.json(response.data); // { success: true, session_id: "..." }
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// 3. Endpoint to get user account details by session ID
-app.get("/api/account", async (req, res) => {
-  const { session_id } = req.query;
-  if (!session_id) {
-    return res.status(400).json({ error: "Session ID required" });
-  }
-
-  try {
-    const response = await axios.get(`https://api.themoviedb.org/3/account`, {
-      params: { api_key: TMDB_API_KEY, session_id },
-    });
-    res.json(response.data);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
 
 // Other existing routes (movies, genres, etc.) remain unchanged...
 //////////////////////////////////////////////////////////////////
