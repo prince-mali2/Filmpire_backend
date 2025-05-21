@@ -9,7 +9,7 @@ const PORT = 3001;
 app.use(cors());
 
 // TMDB API Key
-const TMDB_API_KEY = import.meta.env.VITE_TMDB_KEY;
+const TMDB_API_KEY = "38aabe87b21c9a6d0769987df85b56b9";
 
 // Middleware to log request URLs
 app.use((req, res, next) => {
