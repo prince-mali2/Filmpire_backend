@@ -251,6 +251,7 @@ const Watchlist = mongoose.model("Watchlist", watchlistSchema);
 
 // Add to favorites
 app.post("/favorites", async (req, res) => {
+    console.log(req.body);
   const { userId, movie } = req.body;
 
   try {
