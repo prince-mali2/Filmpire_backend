@@ -11,7 +11,7 @@ app.use(cors());
 
 // MongoDB connection
 mongoose
-  .connect("mongodb+srv://princemali019:princemali123@filmpirecluster.89wo7d6.mongodb.net/?retryWrites=true&w=majority&appName=FilmpireCluster", {
+  .connect("mongodb+srv://princemali019:princemali123@filmpirecluster.89wo7d6.mongodb.net/filmpiredb", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
