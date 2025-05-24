@@ -141,44 +141,7 @@ app.get("/api/movie/:movie_id/:list", async (req, res) => {
     }
 });
 
-// Route: Get User's Favorite Movies
-app.get("/api/account/:accountId/favorite/movies", async (req, res) => {
-    const { accountId } = req.params;
-    const { session_id, page } = req.query;
 
-    try {
-        const response = await axios.get(`https://api.themoviedb.org/3/account/${accountId}/favorite/movies`, {
-            params: {
-                api_key: TMDB_API_KEY,
-                session_id,
-                page: page || 1,
-            },
-        });
-        res.json(response.data);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
-// Route: Get User's Watchlist Movies
-
-app.get("/api/account/:accountId/watchlist/movies", async (req, res) => {
-    const { accountId } = req.params;
-    const { session_id, page } = req.query;
-
-    try {
-        const response = await axios.get(`https://api.themoviedb.org/3/account/${accountId}/watchlist/movies`, {
-            params: {
-                api_key: TMDB_API_KEY,
-                session_id,
-                page: page || 1,
-            },
-        });
-        res.json(response.data);
-    } catch (error) {
-        console.error("Error fetching watchlist movies:", error.message);
-        res.status(500).json({ error: error.message });
-    }
-});
 
 //Get movies by Search
 app.get("/api/search/movie", async (req, res) => {
@@ -205,17 +168,7 @@ app.get("/api/search/movie", async (req, res) => {
 
 ///////////////////////////////////////////////////
 //////////////////////////////////////////////
-app.get('/api/authentication/token/new', async (req, res) => {
-    try {
-        const response = await axios.get('https://api.themoviedb.org/3/authentication/token/new', {
-            params: { api_key: TMDB_API_KEY },
-        });
-        res.json(response.data);
-    } catch (error) {
-        console.error('Error fetching token:', error.message);
-        res.status(500).json({ error: error.message });
-    }
-});
+
 
 
 // Other existing routes (movies, genres, etc.) remain unchanged...
