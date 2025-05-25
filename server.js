@@ -169,14 +169,7 @@ app.get("/api/search/movie", async (req, res) => {
 });
 
 ///////////////////////////////////////////////////
-//////////////////////////////////////////////
-
-
-
-// Other existing routes (movies, genres, etc.) remain unchanged...
-//////////////////////////////////////////////////////////////////
-
-// Start the server
+//////////////////////////////////////////////////
 
 
 
@@ -186,34 +179,11 @@ app.get("/api/search/movie", async (req, res) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//MongoDB Connection
 /////////////////////////////////////////////////////////////////
 
-// const express = require("express");
-// const mongoose = require("mongoose");
+
 import mongoose from "mongoose";
-// const cors = require("cors");
-
-
-
-// // Middleware
-// app.use(express.json());
-// app.use(cors());
 
 // MongoDB connection
 mongoose
@@ -252,10 +222,8 @@ const Watchlist = mongoose.model("Watchlist", watchlistSchema);
 // Routes
 
 // Add to favorites
-app.post("/favorites/:userId", async (req, res) => {
-    console.log(req.body);
-    const {userId} = req.params;
-  const {  movie } = req.body;
+app.post("/favorites", async (req, res) => {
+  const {userId, movie } = req.body;
 
   try {
     const existingFavorite = await Favorite.findOne({ userId, "movie.id": movie.id });
@@ -365,12 +333,6 @@ app.get("/profile/:userId", async (req, res) => {
     res.status(500).json({ message: "Error fetching profile data", error });
   }
 });
-
-
-
-
-
-
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
