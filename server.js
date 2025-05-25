@@ -250,9 +250,10 @@ const Watchlist = mongoose.model("Watchlist", watchlistSchema);
 // Routes
 
 // Add to favorites
-app.post("/favorites", async (req, res) => {
+app.post("/favorites/:userId", async (req, res) => {
     console.log(req.body);
-  const { userId, movie } = req.body;
+    const {userId} = req.params;
+  const {  movie } = req.body;
 
   try {
     const existingFavorite = await Favorite.findOne({ userId, "movie.id": movie.id });
@@ -264,7 +265,7 @@ app.post("/favorites", async (req, res) => {
     await favorite.save();
     res.status(201).json({ message: "Added to favorites", favorite });
   } catch (error) {
-    res.status(500).json({ message: "Error adding to favorites", error });
+    res.status(500).json({ message: "Error adding to favorites ", error });
   }
 });
 
