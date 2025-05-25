@@ -7,6 +7,8 @@ const PORT = 3001;
 
 // Enable CORS
 app.use(cors());
+app.use(express.json()); // Parses incoming JSON requests
+app.use(express.urlencoded({ extended: true })); // Parses URL-encoded bodies
 
 // TMDB API Key
 const TMDB_API_KEY = "38aabe87b21c9a6d0769987df85b56b9";
