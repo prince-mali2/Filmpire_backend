@@ -6,7 +6,10 @@ const app = express();
 const PORT = 3001;
 
 // Enable CORS
-app.use(cors());
+app.use(cors({
+    origin: 'https://filmpire-n9sq.onrender.com', // Your frontend's URL
+
+}));
 app.use(express.json()); // Parses incoming JSON requests
 app.use(express.urlencoded({ extended: true })); // Parses URL-encoded bodies
 
