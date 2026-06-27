@@ -7,8 +7,9 @@ const PORT = 3001;
 
 // Enable CORS
 app.use(cors({
-    origin: 'https://filmpire-n9sq.onrender.com', // Your frontend's URL
-
+    origin: 'https://filmpire-opal.vercel.app', // Your frontend's URL
+// https://filmpire-opal.vercel.app/
+// https://filmpire-n9sq.onrender.com
 }));
 app.use(express.json()); // Parses incoming JSON requests
 app.use(express.urlencoded({ extended: true })); // Parses URL-encoded bodies
@@ -20,6 +21,7 @@ const TMDB_API_KEY = "38aabe87b21c9a6d0769987df85b56b9";
 app.use((req, res, next) => {
     console.log(`Request URL: ${req.url}`);
     next();
+    
 });
 
 // Root route
