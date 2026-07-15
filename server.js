@@ -6,10 +6,25 @@ const app = express();
 const PORT = 3001;
 
 // Enable CORS
+// app.use(cors({
+//     origin: 'https://filmpire-opal.vercel.app', // Your frontend's URL
+// // https://filmpire-opal.vercel.app/
+// // https://filmpire-n9sq.onrender.com
+// }));
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://filmpire-opal.vercel.app"
+];
+
 app.use(cors({
-    origin: 'https://filmpire-opal.vercel.app', // Your frontend's URL
-// https://filmpire-opal.vercel.app/
-// https://filmpire-n9sq.onrender.com
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  }
 }));
 app.use(express.json()); // Parses incoming JSON requests
 app.use(express.urlencoded({ extended: true })); // Parses URL-encoded bodies
