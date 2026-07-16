@@ -127,19 +127,19 @@ app.get("/api/person/:id", async (req, res) => {
 
 // Route: Get Movies by Actor
 // /discover/movie?with_cast=${id}&page=${page}
-app.get("person/${id}/movie_credits&page=${page}", async (req, res) => {
-    const { with_cast, page } = req.query;
+app.get("/api/person/:id/movie_credits", async (req, res) => {
+    const { id } = req.query;
 
-    if (!with_cast) {
+    if (!id) {
         return res.status(400).json({ error: "Actor ID (with_cast) is required" });
     }
 
     try {
-        const response = await axios.get(`https://api.themoviedb.org/3/discover/movie/${id}`, {
+        const response = await axios.get(`https://api.themoviedb.org/3/person/${id}/movie_credits`, {
             params: {
                 api_key: TMDB_API_KEY,
-                with_cast,
-                page: page || 1,
+                id,
+                // page: page || 1,
             },
         });
         res.json(response.data);
