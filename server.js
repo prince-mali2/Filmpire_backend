@@ -127,7 +127,7 @@ app.get("/api/person/:id", async (req, res) => {
 
 // Route: Get Movies by Actor
 // /discover/movie?with_cast=${id}&page=${page}
-app.get("/api/discover/movie/:with_cast", async (req, res) => {
+app.get("person/${id}/movie_credits&page=${page}", async (req, res) => {
     const { with_cast, page } = req.query;
 
     if (!with_cast) {
@@ -135,7 +135,7 @@ app.get("/api/discover/movie/:with_cast", async (req, res) => {
     }
 
     try {
-        const response = await axios.get(`https://api.themoviedb.org/3/discover/movie/${with_cast}`, {
+        const response = await axios.get(`https://api.themoviedb.org/3/discover/movie/${id}`, {
             params: {
                 api_key: TMDB_API_KEY,
                 with_cast,
