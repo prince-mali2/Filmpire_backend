@@ -128,7 +128,7 @@ app.get("/api/person/:id", async (req, res) => {
 // Route: Get Movies by Actor
 // /discover/movie?with_cast=${id}&page=${page}
 app.get("/api/person/:id/movie_credits", async (req, res) => {
-    const { id } = req.query;
+    const { id } = req.params;
 
     if (!id) {
         return res.status(400).json({ error: "Actor ID (with_cast) is required" });
